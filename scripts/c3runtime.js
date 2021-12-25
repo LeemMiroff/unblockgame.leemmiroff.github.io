@@ -4262,17 +4262,17 @@ self.C3_ExpressionFuncs = [
 			const f2 = p._GetNode(2).GetBoundMethod();
 			const n3 = p._GetNode(3);
 			const n4 = p._GetNode(4);
-			return () => (C3.distanceTo(n0.ExpObject(), n1.ExpObject(), (f2() - n3.ExpInstVar()), n4.ExpObject()) * 40);
+			return () => (C3.distanceTo(n0.ExpObject(), n1.ExpObject(), (f2() - n3.ExpInstVar()), n4.ExpObject()) * 30);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
-			return () => ((f0() - n1.ExpInstVar()) - 2);
+			return () => ((f0() - n1.ExpInstVar()) - 0.5);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
-			return () => ((f0() - n1.ExpInstVar()) + 2);
+			return () => ((f0() - n1.ExpInstVar()) + 0.5);
 		},
 		() => 4,
 		p => {
@@ -4281,7 +4281,7 @@ self.C3_ExpressionFuncs = [
 			const n2 = p._GetNode(2);
 			const f3 = p._GetNode(3).GetBoundMethod();
 			const n4 = p._GetNode(4);
-			return () => (C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), (f3() - n4.ExpInstVar())) * 40);
+			return () => (C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), (f3() - n4.ExpInstVar())) * 30);
 		},
 		() => -1
 ];
