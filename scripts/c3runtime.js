@@ -4064,9 +4064,10 @@ self.C3_JsPropNameTable = [
 	{next: 0},
 	{preview: 0},
 	{level: 0},
-	{Sprite2: 0},
-	{Particles: 0},
 	{Sprite3: 0},
+	{Particles: 0},
+	{Particles2: 0},
+	{Particles3: 0},
 	{offsetXUI: 0},
 	{offsetYUI: 0},
 	{levelCount: 0},
@@ -4267,12 +4268,12 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
-			return () => ((f0() - n1.ExpInstVar()) - 0.5);
+			return () => ((f0() - n1.ExpInstVar()) - 1);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
-			return () => ((f0() - n1.ExpInstVar()) + 0.5);
+			return () => ((f0() - n1.ExpInstVar()) + 1);
 		},
 		() => 4,
 		p => {
