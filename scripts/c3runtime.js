@@ -3189,6 +3189,19 @@ e=>this._OnJobWorkerMessage(e)}catch(err){this._hadErrorCreatingWorker=true;this
 
 {
 self["C3_Shaders"] = {};
+self["C3_Shaders"]["ReflectY"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform lowp float pixelWidth;\nuniform lowp float pixelHeight;\nuniform lowp float OffsetY;\nuniform mediump float gradientScale;\nuniform mediump vec2 pixelSize;\nuniform mediump vec2 srcEnd;\nuniform mediump vec2 srcStart;\nuniform mediump vec2 srcOriginStart;\nuniform mediump vec2 srcOriginEnd;\nuniform mediump vec2 layoutStart;\nuniform mediump vec2 layoutEnd;\nuniform lowp sampler2D samplerBack;\nuniform mediump vec2 destStart;\nuniform mediump vec2 destEnd;\nvoid main(void)\n{\nmediump vec2 tex = vTex;\nmediump vec2 n = (vTex - srcOriginStart) / (srcOriginEnd - srcOriginStart);\ntex.y = OffsetY - tex.y + OffsetY;\nmediump vec2 nInvert = (tex - srcOriginStart) / (srcOriginEnd - srcOriginStart);\nlowp vec4 backInvert = texture2D(samplerBack, mix(destStart, destEnd, nInvert));\nlowp vec4 back = texture2D(samplerBack, mix(destStart, destEnd, n));\nbackInvert = (1.0 - gradientScale * n.y) * backInvert;\nlowp vec4 backFinal = (vTex.y < OffsetY) ? backInvert : back;\ngl_FragColor = backFinal;\n}",
+	wgsl: "",
+	blendsBackground: true,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: true,
+	preservesOpaqueness: false,
+	animated: false,
+	parameters: [["OffsetY",0,"float"],["gradientScale",0,"float"]]
+};
 
 }
 
@@ -4326,7 +4339,11 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.choose,
 		C3.Behaviors.MoveTo.Acts.MoveToPosition,
 		C3.Behaviors.MoveTo.Cnds.OnArrived,
-		C3.Plugins.Sprite.Acts.MoveToLayer
+		C3.Plugins.Sprite.Acts.MoveToLayer,
+		C3.Plugins.System.Cnds.EveryTick,
+		C3.Plugins.Sprite.Acts.SetEffectParam,
+		C3.Plugins.System.Exps.viewporttop,
+		C3.Plugins.System.Exps.viewportbottom
 	];
 };
 self.C3_JsPropNameTable = [
@@ -4359,6 +4376,9 @@ self.C3_JsPropNameTable = [
 	{Audio: 0},
 	{SpriteFont2: 0},
 	{MoveTo: 0},
+	{effect: 0},
+	{mirror: 0},
+	{stol: 0},
 	{Sprite3: 0},
 	{buttons: 0},
 	{offsetXUI: 0},
@@ -4592,7 +4612,15 @@ self.C3_ExpressionFuncs = [
 		},
 		() => 720,
 		() => 680,
-		() => -600
+		() => -600,
+		() => "ReflectY",
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			const f3 = p._GetNode(3).GetBoundMethod();
+			return () => (1 - ((n0.ExpObject() - f1(0)) / (f2(0) - f3(0))));
+		}
 ];
 
 
