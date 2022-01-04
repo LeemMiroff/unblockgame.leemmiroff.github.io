@@ -4295,21 +4295,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio,
 		C3.Behaviors.MoveTo,
 		C3.Plugins.System.Cnds.OnLayoutStart,
-		C3.Plugins.Arr.Acts.SetXY,
-		C3.Plugins.AJAX.Acts.RequestFile,
-		C3.Plugins.Sprite.Acts.Destroy,
-		C3.Plugins.Spritefont2.Acts.SetText,
-		C3.Plugins.System.Acts.Wait,
-		C3.Plugins.AJAX.Cnds.OnComplete,
-		C3.Plugins.System.Cnds.For,
 		C3.Plugins.Arr.Acts.SetInstanceVar,
-		C3.Plugins.System.Exps.tokenat,
-		C3.Plugins.AJAX.Exps.LastData,
-		C3.Plugins.System.Exps.loopindex,
-		C3.Plugins.System.Exps.int,
 		C3.Plugins.Arr.Exps.At,
+		C3.Plugins.Spritefont2.Acts.SetText,
+		C3.Plugins.System.Cnds.For,
 		C3.Plugins.Arr.Cnds.CompareXY,
+		C3.Plugins.System.Exps.loopindex,
 		C3.Plugins.System.Acts.CreateObject,
+		C3.Plugins.System.Exps.int,
 		C3.Plugins.Sprite.Acts.SetAnimFrame,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.Touch.Cnds.IsTouchingObject,
@@ -4326,12 +4319,12 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.EightDir.Acts.SetSpeed,
 		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Plugins.Audio.Acts.PlayByName,
+		C3.Plugins.Sprite.Cnds.CompareX,
+		C3.Plugins.Sprite.Cnds.CompareY,
 		C3.Plugins.Sprite.Cnds.CompareFrame,
 		C3.Behaviors.EightDir.Acts.SetMaxSpeed,
-		C3.Plugins.Sprite.Cnds.CompareX,
 		C3.Behaviors.EightDir.Acts.SimulateControl,
-		C3.Plugins.Sprite.Cnds.CompareY,
-		C3.Plugins.Arr.Acts.AddInstanceVar,
+		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.Mouse.Cnds.IsOverObject,
 		C3.Plugins.Sprite.Acts.SetOpacity,
 		C3.Plugins.System.Cnds.Else,
@@ -4340,10 +4333,32 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.MoveTo.Acts.MoveToPosition,
 		C3.Behaviors.MoveTo.Cnds.OnArrived,
 		C3.Plugins.Sprite.Acts.MoveToLayer,
-		C3.Plugins.System.Cnds.EveryTick,
-		C3.Plugins.Sprite.Acts.SetEffectParam,
-		C3.Plugins.System.Exps.viewporttop,
-		C3.Plugins.System.Exps.viewportbottom
+		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.Arr.Acts.AddInstanceVar,
+		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.System.Acts.RestartLayout,
+		C3.Plugins.Arr.Cnds.CompareInstanceVar,
+		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.Spritefont2.Acts.Destroy,
+		C3.Plugins.System.Cnds.Repeat,
+		C3.Plugins.System.Acts.Wait,
+		C3.Plugins.Sprite.Exps.IID,
+		C3.Plugins.Spritefont2.Acts.SetInstanceVar,
+		C3.Plugins.Spritefont2.Exps.IID,
+		C3.Plugins.Touch.Cnds.OnTouchObject,
+		C3.Plugins.System.Exps.max,
+		C3.Plugins.System.Exps.min,
+		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
+		C3.Plugins.Spritefont2.Cnds.CompareInstanceVar,
+		C3.Plugins.Spritefont2.Acts.SetVisible,
+		C3.Plugins.Sprite.Acts.SetVisible,
+		C3.Plugins.Arr.Acts.SetXY,
+		C3.Plugins.AJAX.Acts.RequestFile,
+		C3.Plugins.AJAX.Cnds.OnComplete,
+		C3.Plugins.Arr.Acts.SetSize,
+		C3.Plugins.System.Exps.tokenat,
+		C3.Plugins.AJAX.Exps.LastData,
+		C3.Plugins.Arr.Acts.Insert
 	];
 };
 self.C3_JsPropNameTable = [
@@ -4351,16 +4366,21 @@ self.C3_JsPropNameTable = [
 	{currentLevel: 0},
 	{currentLevelStr: 0},
 	{turns: 0},
+	{currentPage: 0},
+	{levelsOnPage: 0},
+	{turnsDone: 0},
 	{levelData: 0},
 	{picked: 0},
 	{offsetX: 0},
 	{offsetY: 0},
+	{takeX: 0},
+	{takeY: 0},
 	{Solid: 0},
 	{"8Direction": 0},
 	{Tween: 0},
 	{block: 0},
 	{AJAX: 0},
-	{Sprite: 0},
+	{pole: 0},
 	{TiledBackground: 0},
 	{walls: 0},
 	{Sine: 0},
@@ -4372,19 +4392,25 @@ self.C3_JsPropNameTable = [
 	{Particles3: 0},
 	{SpriteFont: 0},
 	{Mouse: 0},
-	{Sprite2: 0},
+	{gradient: 0},
 	{Audio: 0},
 	{SpriteFont2: 0},
 	{MoveTo: 0},
 	{effect: 0},
 	{mirror: 0},
 	{stol: 0},
-	{Sprite3: 0},
+	{fon: 0},
+	{level: 0},
+	{levelSelector: 0},
+	{pageScroll: 0},
+	{levelNumber: 0},
+	{play: 0},
 	{buttons: 0},
 	{offsetXUI: 0},
 	{offsetYUI: 0},
 	{levelCount: 0},
-	{tileSize: 0}
+	{tileSize: 0},
+	{levelsUnlocked: 0}
 ];
 }
 
@@ -4485,37 +4511,22 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpInstVar(), 0);
+		},
 		() => 0,
-		() => 35,
-		() => 3,
-		() => 34,
-		() => 2,
-		() => "level",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => and("уровень ", (n0.ExpInstVar() + 1));
 		},
-		() => 0.1,
 		p => {
 			const n0 = p._GetNode(0);
 			return () => and("target ", n0.ExpInstVar());
 		},
-		() => "levels",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() - 1);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const f1 = p._GetNode(1).GetBoundMethod();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => f0(f1(), f2(), "\n");
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0();
-		},
-		() => "levelData",
+		() => "level",
+		() => 1,
 		() => 36,
 		p => {
 			const n0 = p._GetNode(0);
@@ -4523,18 +4534,10 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			const f1 = p._GetNode(1).GetBoundMethod();
-			const n2 = p._GetNode(2);
-			const f3 = p._GetNode(3).GetBoundMethod();
-			return () => f0(f1(n2.ExpInstVar(), f3(), ","));
+			return () => f0();
 		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => n0.ExpObject(n1.ExpInstVar(), 0);
-		},
-		() => 1,
 		() => 9,
+		() => 2,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
@@ -4563,6 +4566,10 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
+			return () => n0.ExpObject();
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			const v2 = p._GetNode(2).GetVar();
 			const v3 = p._GetNode(3).GetVar();
@@ -4570,8 +4577,13 @@ self.C3_ExpressionFuncs = [
 			const v5 = p._GetNode(5).GetVar();
 			return () => (((Math.floor(((n0.ExpObject() - v1.GetValue()) / v2.GetValue())) * v3.GetValue()) + (v4.GetValue() / 2)) + v5.GetValue());
 		},
-		() => "1",
+		() => "5",
 		() => "",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpInstVar() + 1);
+		},
+		() => 3,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -4599,11 +4611,7 @@ self.C3_ExpressionFuncs = [
 			const n4 = p._GetNode(4);
 			return () => (C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), (f3() - n4.ExpInstVar())) * 30);
 		},
-		() => -1,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => and("taget ", n0.ExpInstVar());
-		},
+		() => "graphic tips",
 		() => 100,
 		() => 30,
 		p => {
@@ -4613,13 +4621,64 @@ self.C3_ExpressionFuncs = [
 		() => 720,
 		() => 680,
 		() => -600,
-		() => "ReflectY",
+		() => "go_PN",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
+		},
+		() => 610,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0((n1.ExpInstVar() + 1.5));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (((f0() % 3) * 180) + 180);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => ((f0((f1() / 3)) * 180) + 180);
+		},
 		p => {
 			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpInstVar() * 15) + n1.ExpObject());
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0((n1.ExpInstVar() - 1), 0);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const n3 = p._GetNode(3);
+			return () => f0((n1.ExpInstVar() + 1), Math.floor(((v2.GetValue() - 1) / n3.ExpInstVar())));
+		},
+		() => 35,
+		() => 34,
+		() => 37,
+		() => "levels",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() - 1);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
 			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => f0(f1(), f2(), "\n");
+		},
+		() => "levelData",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
 			const f3 = p._GetNode(3).GetBoundMethod();
-			return () => (1 - ((n0.ExpObject() - f1(0)) / (f2(0) - f3(0))));
+			return () => f0(f1(n2.ExpInstVar(), f3(), ","));
 		}
 ];
 
