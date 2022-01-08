@@ -4295,6 +4295,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio,
 		C3.Behaviors.MoveTo,
 		C3.Plugins.System.Cnds.OnLayoutStart,
+		C3.Plugins.Sprite.Acts.Destroy,
 		C3.Plugins.Arr.Acts.SetInstanceVar,
 		C3.Plugins.Arr.Exps.At,
 		C3.Plugins.Spritefont2.Acts.SetText,
@@ -4333,7 +4334,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.MoveTo.Acts.MoveToPosition,
 		C3.Behaviors.MoveTo.Cnds.OnArrived,
 		C3.Plugins.Sprite.Acts.MoveToLayer,
-		C3.Plugins.Sprite.Acts.Destroy,
 		C3.Plugins.Arr.Acts.AddInstanceVar,
 		C3.Plugins.System.Acts.GoToLayout,
 		C3.Plugins.System.Acts.RestartLayout,
@@ -4405,6 +4405,7 @@ self.C3_JsPropNameTable = [
 	{pageScroll: 0},
 	{levelNumber: 0},
 	{play: 0},
+	{Sprite: 0},
 	{buttons: 0},
 	{offsetXUI: 0},
 	{offsetYUI: 0},
@@ -4639,7 +4640,16 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => ((f0((f1() / 3)) * 180) + 180);
+			return () => ((f0((f1() / 3)) * 200) + 330);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (((f0() % 3) * 180) + 178);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => ((f0((f1() / 3)) * 200) + 320);
 		},
 		p => {
 			const n0 = p._GetNode(0);
