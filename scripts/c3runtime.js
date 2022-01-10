@@ -4326,9 +4326,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.EightDir.Acts.SetMaxSpeed,
 		C3.Behaviors.EightDir.Acts.SimulateControl,
 		C3.Plugins.System.Cnds.IsGroupActive,
-		C3.Plugins.Mouse.Cnds.IsOverObject,
-		C3.Plugins.Sprite.Acts.SetOpacity,
-		C3.Plugins.System.Cnds.Else,
 		C3.Plugins.System.Cnds.Every,
 		C3.Plugins.System.Exps.choose,
 		C3.Behaviors.MoveTo.Acts.MoveToPosition,
@@ -4339,6 +4336,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.RestartLayout,
 		C3.Plugins.Arr.Cnds.CompareInstanceVar,
 		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.System.Cnds.Else,
 		C3.Plugins.Spritefont2.Acts.Destroy,
 		C3.Plugins.System.Cnds.Repeat,
 		C3.Plugins.System.Acts.Wait,
@@ -4406,6 +4404,7 @@ self.C3_JsPropNameTable = [
 	{levelNumber: 0},
 	{play: 0},
 	{Sprite: 0},
+	{tbg: 0},
 	{buttons: 0},
 	{offsetXUI: 0},
 	{offsetYUI: 0},
@@ -4578,7 +4577,7 @@ self.C3_ExpressionFuncs = [
 			const v5 = p._GetNode(5).GetVar();
 			return () => (((Math.floor(((n0.ExpObject() - v1.GetValue()) / v2.GetValue())) * v3.GetValue()) + (v4.GetValue() / 2)) + v5.GetValue());
 		},
-		() => "5",
+		() => "9",
 		() => "",
 		p => {
 			const n0 = p._GetNode(0);
@@ -4613,14 +4612,12 @@ self.C3_ExpressionFuncs = [
 			return () => (C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), (f3() - n4.ExpInstVar())) * 30);
 		},
 		() => "graphic tips",
-		() => 100,
-		() => 30,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(5, 7, 9);
 		},
 		() => 720,
-		() => 680,
+		() => 620,
 		() => -600,
 		() => "go_PN",
 		p => {
